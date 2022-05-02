@@ -1,0 +1,24 @@
+.marker {
+  box-sizing: border-box;
+  position: relative;
+  transform: rotate(45deg) translate(-50%, -100%);
+  width: 30px;
+  height: 30px;
+  border-radius: 100% 100% 0 100%;
+  border: 2px solid;
+  background: red;
+}
+
+.marker::before {
+  content: "";
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  width: 50%;
+  height: 50%;
+  border: 2px solid black;
+  top: 24%;
+  left: 24%;
+  border-radius: 40px;
+  background: white;
+}

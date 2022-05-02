@@ -1,0 +1,7 @@
+.table-container {
+  overflow: auto;
+}
+
+.cell {
+  text-align: center;
+}

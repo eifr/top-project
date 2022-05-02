@@ -1,0 +1,18 @@
+.search-input {
+}
+.autoComplete {
+  background-color: whitesmoke;
+  list-style: none;
+  padding: 0;
+  max-height: 100px;
+  overflow: auto;
+}
+
+.autoComplete-item {
+  padding: 5px;
+  cursor: pointer;
+}
+.autoComplete-item:hover {
+  background-color: black;
+  color: white;
+}

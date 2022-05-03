@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { Suspense, useEffect, useMemo, useState } from "react";
 import "./app.css";
 import { useFetch } from "./hooks/useFetch";
 import { API_URL } from "./constants";
@@ -22,7 +22,7 @@ const manipulator = (data: any): MeteorData[] =>
   });
 
 function App() {
-  const { data } = useFetch<MeteorData[]>(API_URL, manipulator);
+  const { data } = useFetch<MeteorData[]>(API_URL, manipulator, []);
   const [search, setSearch] = useState("");
   const [mass, setMass] = useState(0);
   const { Notification, open } = useToastNotification();
@@ -66,45 +66,44 @@ function App() {
       }, []) || [];
 
   return (
-    <>
-      {filtered && (
-        <div className="app">
-          <MarkersMap markers={coords} />
+    <Suspense fallback={"loading"}>
+      <div className="app">
+        <MarkersMap markers={coords} />
 
-          <Card
-            style={{
-              height: "40vh",
-              position: "absolute",
-              top: "35px",
-              left: "35px",
-            }}
-          >
-            <SearchInput
-              onChange={setSearch}
-              value={search}
-              results={filtered}
-              placeholder={"Search by year"}
-            />
+        <Card
+          style={{
+            height: "40vh",
+            position: "absolute",
+            top: "35px",
+            left: "35px",
+          }}
+        >
+          <SearchInput
+            onChange={setSearch}
+            value={search}
+            results={filtered}
+            placeholder={"Search by year"}
+          />
 
-            <Table
-              data={filtered}
-              columns={[
-                { label: "id" },
-                { label: "name" },
-                { label: "year" },
-                {
-                  label: "mass",
-                  filterBy: (filter) => {
-                    setMass(Number(filter));
-                  },
+          <Table
+            data={filtered}
+            columns={[
+              { label: "id" },
+              { label: "name" },
+              { label: "year" },
+              {
+                label: "mass",
+                filterBy: (filter) => {
+                  setMass(Number(filter));
                 },
-              ]}
-            />
-          </Card>
-        </div>
-      )}
+              },
+            ]}
+          />
+        </Card>
+      </div>
+
       <Notification />
-    </>
+    </Suspense>
   );
 }
 

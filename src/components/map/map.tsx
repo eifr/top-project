@@ -30,13 +30,7 @@ export const MarkersMap: React.FC<GoogleMapProps> = ({ markers }) => {
           zoom={1}
         >
           {markers.map((marker) => (
-            <Marker
-              key={marker.id}
-              position={marker}
-              onMouseOver={() => {
-                console.log(marker);
-              }}
-            />
+            <Marker key={marker.id} position={marker} />
           ))}
         </GoogleMap>
       </Wrapper>

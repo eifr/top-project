@@ -1,8 +1,12 @@
 import { useState, useEffect } from "react";
 
 // React hoot to use fetch api within a component with Generics
-export function useFetch<T>(url: string, manipulator = (data: any) => data) {
-  const [data, setData] = useState<T>();
+export function useFetch<T>(
+  url: string,
+  manipulator = (data: any) => data,
+  defaultValue: T
+) {
+  const [data, setData] = useState<T>(defaultValue);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<boolean>(false);
 
